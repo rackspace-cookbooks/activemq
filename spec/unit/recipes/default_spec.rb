@@ -55,7 +55,7 @@ describe 'activemq::default' do
             expect(chef_run).to enable_service('activemq')
           end
           it 'validates link /etc/init.d/activemq is there' do
-	    expect(chef_run).to create_link('/etc/init.d/activemq').with(to: '/opt/apache-activemq-5.8.0/bin/linux-x86-64/activemq')
+            expect(chef_run).to create_link('/etc/init.d/activemq').with(to: '/opt/apache-activemq-5.8.0/bin/linux-x86-64/activemq')
           end
           it 'validates link /opt/apache-activemq-5.8.0/bin/linux is there' do
             expect(chef_run).to create_link('/opt/apache-activemq-5.8.0/bin/linux').with(to: '/opt/apache-activemq-5.8.0/bin/linux-x86-64')
