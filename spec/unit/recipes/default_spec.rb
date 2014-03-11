@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe 'activemq::default' do
+describe 'rackspace_activemq::default' do
   activemq_test_platforms.each do |platform, versions|
     describe "on #{platform}" do
       versions.each do |version|
@@ -28,10 +28,10 @@ describe 'activemq::default' do
           end
           let(:chef_run) do
             runner = ChefSpec::Runner.new(platform: platform.to_s, version: version.to_s)
-            runner.converge('activemq::default')
+            runner.converge('rackspace_activemq::default')
           end
           it 'include the default recipe' do
-            expect(chef_run).to include_recipe 'activemq::default'
+            expect(chef_run).to include_recipe 'rackspace_activemq::default'
           end
           it 'file jdk.sh exists' do
             expect(chef_run).to create_file '/etc/profile.d/jdk.sh'
