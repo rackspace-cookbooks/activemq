@@ -28,7 +28,7 @@ directory node['activemq']['home'] do
   recursive true
 end
 
-unless File.exists?("#{activemq_home}/bin/activemq")
+unless File.exist?("#{activemq_home}/bin/activemq")
   remote_file "#{tmp}/apache-activemq-#{version}-bin.tar.gz" do
     source "#{mirror}/activemq/apache-activemq/#{version}/apache-activemq-#{version}-bin.tar.gz"
     mode   '0644'
