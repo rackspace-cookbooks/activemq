@@ -1,8 +1,9 @@
 #
-# Cookbook Name:: activemq
+# Cookbook Name:: rackspace_activemq
 # Recipe:: default
 #
 # Copyright 2009, Opscode, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,11 +54,13 @@ link '/etc/init.d/activemq' do
 end
 
 template "#{activemq_home}/conf/activemq.xml" do
+  cookbook node['rackspace_activemq']['template']['activemq_xml']
   source   'activemq.xml.erb'
   mode     '0644'
   owner    'root'
   group    'root'
   notifies :restart, 'service[activemq]'
+  only_if  { node['rackspace_activemq']['use_default_config'] }
 end
 
 service 'activemq' do
@@ -77,6 +80,7 @@ link '/var/run/activemq.pid' do
 end
 
 template "#{activemq_home}/bin/linux/wrapper.conf" do
+  cookbook node['rackspace_activemq']['template']['wrapper_conf']
   source   'wrapper.conf.erb'
   mode     '0644'
   notifies :restart, 'service[activemq]'
