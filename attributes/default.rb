@@ -30,5 +30,5 @@ default['rackspace_activemq']['use_default_config'] = false
 default['rackspace_activemq']['broker_name'] = 'localhost'
 default['rackspace_activemq']['usejmx'] = false
 
-cookbook node['rackspace_activemq']['template']['activemq_xml'] = rackspace_activemq
-cookbook node['rackspace_activemq']['template']['wrapper_conf'] = rackspace_activemq
+default['rackspace_activemq']['template']['activemq_xml'] = 'rackspace_activemq'
+default['rackspace_activemq']['template']['wrapper_conf'] = 'rackspace_activemq'
