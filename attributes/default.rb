@@ -1,8 +1,9 @@
 #
-# Cookbook Name:: activemq
+# Cookbook Name:: rackspace_activemq
 # Attributes:: default
 #
 # Copyright 2009-2011, Opscode, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,3 +29,6 @@ default['rackspace_activemq']['use_default_config'] = false
 
 default['rackspace_activemq']['broker_name'] = 'localhost'
 default['rackspace_activemq']['usejmx'] = false
+
+default['rackspace_activemq']['template']['activemq_xml'] = 'rackspace_activemq'
+default['rackspace_activemq']['template']['wrapper_conf'] = 'rackspace_activemq'
