@@ -1,8 +1,9 @@
 #
-# Cookbook Name:: activemq
+# Cookbook Name:: rackspace_activemq
 # Attributes:: default
 #
 # Copyright 2009-2011, Opscode, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +18,17 @@
 # limitations under the License.
 #
 
-default['activemq']['mirror']  = 'http://apache.mirrors.tds.net'
-default['activemq']['version'] = '5.8.0'
-default['activemq']['home']  = '/opt'
-default['activemq']['wrapper']['max_memory'] = '1024'
-default['activemq']['wrapper']['useDedicatedTaskRunner'] = 'true'
+default['rackspace_activemq']['mirror']  = 'http://apache.mirrors.tds.net'
+default['rackspace_activemq']['version'] = '5.8.0'
+default['rackspace_activemq']['home']  = '/opt'
+default['rackspace_activemq']['wrapper']['max_memory'] = '1024'
+default['rackspace_activemq']['wrapper']['useDedicatedTaskRunner'] = 'true'
 
-default['activemq']['enable_stomp'] = true
-default['activemq']['use_default_config'] = false
+default['rackspace_activemq']['enable_stomp'] = true
+default['rackspace_activemq']['use_default_config'] = false
 
-default['activemq']['broker_name'] = 'localhost'
-default['activemq']['usejmx'] = false
+default['rackspace_activemq']['broker_name'] = 'localhost'
+default['rackspace_activemq']['usejmx'] = false
+
+default['rackspace_activemq']['template']['activemq_xml'] = 'rackspace_activemq'
+default['rackspace_activemq']['template']['wrapper_conf'] = 'rackspace_activemq'

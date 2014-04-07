@@ -1,8 +1,9 @@
 #
-# Cookbook Name:: activemq
+# Cookbook Name:: rackspace_activemq
 # Recipe:: default
 #
 # Copyright 2009, Opscode, Inc.
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +21,11 @@
 include_recipe 'java::default'
 
 tmp = Chef::Config[:file_cache_path]
-version = node['activemq']['version']
-mirror = node['activemq']['mirror']
-activemq_home = "#{node['activemq']['home']}/apache-activemq-#{version}"
+version = node['rackspace_activemq']['version']
+mirror = node['rackspace_activemq']['mirror']
+activemq_home = "#{node['rackspace_activemq']['home']}/apache-activemq-#{version}"
 
-directory node['activemq']['home'] do
+directory node['rackspace_activemq']['home'] do
   recursive true
 end
 
@@ -35,7 +36,7 @@ unless File.exist?("#{activemq_home}/bin/activemq")
   end
 
   execute "tar zxf #{tmp}/apache-activemq-#{version}-bin.tar.gz" do
-    cwd node['activemq']['home']
+    cwd node['rackspace_activemq']['home']
   end
 end
 
@@ -53,12 +54,13 @@ link '/etc/init.d/activemq' do
 end
 
 template "#{activemq_home}/conf/activemq.xml" do
+  cookbook node['rackspace_activemq']['template']['activemq_xml']
   source   'activemq.xml.erb'
-  mode     '0755'
+  mode     '0644'
   owner    'root'
   group    'root'
   notifies :restart, 'service[activemq]'
-  only_if  { node['activemq']['use_default_config'] }
+  only_if  { node['rackspace_activemq']['use_default_config'] }
 end
 
 service 'activemq' do
@@ -78,6 +80,7 @@ link '/var/run/activemq.pid' do
 end
 
 template "#{activemq_home}/bin/linux/wrapper.conf" do
+  cookbook node['rackspace_activemq']['template']['wrapper_conf']
   source   'wrapper.conf.erb'
   mode     '0644'
   notifies :restart, 'service[activemq]'
