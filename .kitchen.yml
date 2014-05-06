@@ -1,17 +1,44 @@
+---
 driver_plugin: vagrant
 driver_config:
-  require_chef_omnibus: true
+  require_chef_omnibus: latest
 
 platforms:
-  - name: ubuntu-12.04
-    run_list:
-      - recipe[apt]
-  - name: ubuntu-10.04
-    run_list:
-      - recipe[apt]
-  - name: centos-6.4
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
+  run_list:
+  - recipe[rackspace_apt]
+- name: centos-6.4
+  driver_config:
+    box: opscode-centos-6.4
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.4_chef-provisionerless.box
+- name: debian-7.2.0
+  driver_config:
+    box: opscode-debian-7.2.0
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
+  run_list:
+  - recipe[rackspace_apt]
+
+platforms:
+- name: centos-6.4
+  driver_config:
+    image_id: 'f70ed7c7-b42e-4d77-83d8-40fa29825b85'
+  run_list:
+    - recipe[rackspace_yum]
+- name: ubuntu-12.04
+  driver_config:
+    image_id: '80fbcb55-b206-41f9-9bc2-2dd7aac6c061'
+  run_list:
+  - recipe[rackspace_apt]
+- name: debian-7.2
+  driver_config:
+    image_id: '857d7d36-34f3-409f-8435-693e8797be8b'
+  run_list:
+    - recipe[rackspace_apt]
 
 suites:
-  - name: default
+  - name: rackspace_activemq
     run_list:
-      - recipe[activemq]
+      - recipe[rackspace_activemq]
