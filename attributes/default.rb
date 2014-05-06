@@ -19,7 +19,7 @@
 #
 
 default['rackspace_activemq']['mirror']  = 'http://apache.mirrors.tds.net'
-default['rackspace_activemq']['version'] = '5.8.0'
+default['rackspace_activemq']['version'] = '5.9.1'
 default['rackspace_activemq']['home']  = '/opt'
 default['rackspace_activemq']['wrapper']['max_memory'] = '1024'
 default['rackspace_activemq']['wrapper']['useDedicatedTaskRunner'] = 'true'

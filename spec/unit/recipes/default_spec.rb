@@ -24,7 +24,7 @@ describe 'rackspace_activemq::default' do
         describe version do
           before :each do
             stub_command('test -f /var/run/activemq.pid').and_return(true)
-            stub_command('tar zxf /var/chef/cache/apache-activemq-5.8.0-bin.tar.gz').and_return(true)
+            stub_command('tar zxf /var/chef/cache/apache-activemq-5.9.1-bin.tar.gz').and_return(true)
           end
           let(:chef_run) do
             runner = ChefSpec::Runner.new(platform: platform.to_s, version: version.to_s)
@@ -37,7 +37,7 @@ describe 'rackspace_activemq::default' do
             expect(chef_run).to create_file '/etc/profile.d/jdk.sh'
           end
           it 'file bin/activemq exists' do
-            expect(chef_run).to create_file '/opt/apache-activemq-5.8.0/bin/activemq'
+            expect(chef_run).to create_file '/opt/apache-activemq-5.9.1/bin/activemq'
           end
           it 'populate the opt directory' do
             expect(chef_run).to create_directory('/opt')
@@ -46,19 +46,19 @@ describe 'rackspace_activemq::default' do
             expect(chef_run).to create_directory('/etc/profile.d')
           end
           it 'validate activemq tar.gz file' do
-            expect(chef_run).to create_remote_file('/var/chef/cache/apache-activemq-5.8.0-bin.tar.gz')
+            expect(chef_run).to create_remote_file('/var/chef/cache/apache-activemq-5.9.1-bin.tar.gz')
           end
           it 'extract activemq tar.gz file' do
-            expect(chef_run).to run_execute('tar zxf /var/chef/cache/apache-activemq-5.8.0-bin.tar.gz')
+            expect(chef_run).to run_execute('tar zxf /var/chef/cache/apache-activemq-5.9.1-bin.tar.gz')
           end
           it 'enables the service' do
             expect(chef_run).to enable_service('activemq')
           end
           it 'validates link /etc/init.d/activemq is there' do
-            expect(chef_run).to create_link('/etc/init.d/activemq').with(to: '/opt/apache-activemq-5.8.0/bin/linux-x86-64/activemq')
+            expect(chef_run).to create_link('/etc/init.d/activemq').with(to: '/opt/apache-activemq-5.9.1/bin/linux-x86-64/activemq')
           end
-          it 'validates link /opt/apache-activemq-5.8.0/bin/linux is there' do
-            expect(chef_run).to create_link('/opt/apache-activemq-5.8.0/bin/linux').with(to: '/opt/apache-activemq-5.8.0/bin/linux-x86-64')
+          it 'validates link /opt/apache-activemq-5.9.1/bin/linux is there' do
+            expect(chef_run).to create_link('/opt/apache-activemq-5.9.1/bin/linux').with(to: '/opt/apache-activemq-5.9.1/bin/linux-x86-64')
           end
         end
       end
